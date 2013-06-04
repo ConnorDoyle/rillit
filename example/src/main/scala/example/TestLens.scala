@@ -1,5 +1,6 @@
 package example
 
+import scala.language.existentials
 import rillit._
 
 object Main {

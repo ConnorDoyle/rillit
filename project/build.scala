@@ -8,7 +8,12 @@ object build extends Build {
       scalaVersion := "2.10.1",
       //scalacOptions ++= Seq("-Xlog-free-terms", "-Ymacro-debug-lite"),
       libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-reflect" % _),
-      libraryDependencies += "com.chuusai"  %% "shapeless" % "1.2.4"
+      libraryDependencies += "com.chuusai"  %% "shapeless" % "1.2.4",
+      scalacOptions in Compile ++= Seq(
+        "-unchecked",
+        "-deprecation",
+        "-feature"
+      )
     )
 
     lazy val core = Project(

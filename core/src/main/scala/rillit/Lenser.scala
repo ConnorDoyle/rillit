@@ -5,6 +5,7 @@ import scala.reflect.macros.Context
 import shapeless.Lens
 
 object Lenser {
+
   trait StackedLens[A, B, C] extends Lens[A, C] {
     protected def parent: Lens[A, B]
     protected def local: Lens[B, C]
@@ -63,7 +64,7 @@ object Lenser {
       )
     }
 
-    val lenser = Select(Ident("rillit"), "Lenser")
+    val lenser = Select(Ident(newTermName("rillit")), newTermName("Lenser"))
     val source = c.weakTypeOf[A] 
 
     val tree = util.Tree.unfold(accessors(source))(
@@ -203,7 +204,7 @@ object Lenser {
         ),
         TypeTree(),
         Apply(
-          Select(Ident(sx), "copy"),
+          Select(Ident(sx), newTermName("copy")),
           AssignOrNamedArg(Ident(acc.name), Ident(sv)) :: Nil
         )
       )
